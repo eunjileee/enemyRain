@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+#bg {
+    background-image: url('images/bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 800px;
+    height: 600px;
+    overflow: hidden;
+}
+
+
+.bgAndHero {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    top: 30px;
+}
+
+.hero_front {
+    width: 35px;
+    height: 54px;
+    background-image: url('images/hero.png');
+    position: absolute;
+    bottom: 0;
+    left: 400px;
+}
+
+
+.enemy {
+    width: 45px;
+    height: 54px;
+    position: absolute;
+    background-image: url('images/enemy.png');
+    top: 0;
+}
+
