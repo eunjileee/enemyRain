@@ -22,12 +22,3 @@ window.addEventListener('keydown', function(event) {
 window.addEventListener('keyup', function() {
     front.style.backgroundPosition = "0px 0px";
 })
-
-
-//class 함수로 작성
-/*
-class Hero {
-
-
-}
-*/

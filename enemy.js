@@ -4,11 +4,11 @@ class EnemyGame {
         this.divTag = document.createElement('div')
         this.divTag.className = 'enemy';
         this.bg = document.querySelector('.bgAndHero')
-        this.enemy = bg.appendChild(this.divTag); //enemy 생성
-        this.position = this.enemy.offsetTop;
-        this.enemyLeft = this.enemy.offsetLeft;
-        this.front = document.querySelector('.hero_front');
-        this.heroLeft = this.front.offsetLeft; // x값
+        this.enemy = this.bg.appendChild(this.divTag); //enemy 생성
+        this.enemyTop = this.enemy.offsetTop;
+        this.hero = document.querySelector('.hero_front');
+        this.heroTop = this.hero.offsetTop;
+        this.heroLeft = this.hero.offsetLeft;
         this.random();
         this.play();
     }
@@ -17,35 +17,34 @@ class EnemyGame {
 
     random () { //랜덤 좌표 생성
         let randomPosition = Math.floor(Math.random() * 750);
+        randomPosition = randomPosition + 7;
         this.enemy.style.left = randomPosition + "px";
     }
 
-    play() { setInterval(() => {
-        if (this.position < 550) {
-            this.position = this.position + 7;
-            this.enemy.style.top = this.position + "px"; //enemy의 top위치에 저장
-        }
-
-    // 바닥에 닿았을 때 시체
-    if ((546 <= this.position) && (this.position <= 550) && ((this.enemyLeft > (this.heroLeft - 45)) && (this.enemyLeft < (this.heroLeft + 45)))) {
-        this.divTag.remove();
-    }
-    else if (this.position > 550) {
-        this.enemy.style.backgroundPosition = "-35px 0px";
-        var audio = new Audio('./audio/dying.wav');
-        audio.play();   
-        //clearInterval(this.play);
-        setTimeout(() => {
+    play() { setInterval(() => { //enemy 내려오기
+        if (this.enemyTop < 550) {
+            this.enemyTop = this.enemyTop + 7; //enemy의 top위치에 저장
+            this.enemy.style.top = this.enemyTop + "px"; 
+        } 
+        
+        if ((this.enemyTop > 490) && (this.enemyTop < 550) && (this.heroLeft - 45) < parseInt(this.enemy.style.left) && (this.heroLeft + 45) > parseInt(this.enemy.style.left)) {
             this.divTag.remove();
-        }, 1000)
-    } 
+        } else if (this.enemyTop > 550) { // 바닥에 닿았을 때 시체
+            this.enemy.style.backgroundPosition = "-35px 0px";
+            var audio = new Audio('./audio/dying.wav');
+            audio.play();   
+            setTimeout(() => {
+                this.divTag.remove();
+            }, 1000)
+        }
+        
     }, 2000/60)  
     }
 }
 
 setInterval(() => {
-    new EnemyGame();
-}, 1000);
+     new EnemyGame();
+ }, 1000);
 
 
 
